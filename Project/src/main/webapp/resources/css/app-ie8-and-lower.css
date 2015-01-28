@@ -1,0 +1,15 @@
+.nwellSize3{
+    width: 283px;
+}
+
+.pContainerSmallSummary{
+	width: 217px;
+}
+
+html, body {
+    background-color: #fff;
+}
+
+body #searchOptionsBtn, body #searchButton{
+	height: 40px;
+}
