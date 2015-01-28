@@ -2,7 +2,6 @@ package com.finance.financeapp.contracts;
 
 import java.util.List;
 
-import com.finance.financeapp.ejb.Usuario;
 import com.finance.financeapp.pojo.UsuarioPOJO;
 
 public class UsersResponse extends BaseResponse{

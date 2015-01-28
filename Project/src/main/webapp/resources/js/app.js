@@ -28,6 +28,11 @@ App.config(function ($routeProvider,$provide,$httpProvider) {
         controller: RentController
     });
 	
+	$routeProvider.when('/gastos/all', {
+        templateUrl: 'layoutservice/gastos/all',
+        controller: GastoController
+    });
+	
 	$routeProvider.otherwise({redirectTo: '/users'});
 	
 	//RESPONSE INTERCEPTOR FOR ALL THE ANGULAR CALLS

@@ -49,4 +49,10 @@ public class LayoutController {
 	{
 		return "layouts/rentDo";
 	}
+	
+	@RequestMapping(value = "/gastos/all")
+	public String getGastosAllLayout()
+	{
+		return "layouts/gastosAll";
+	}
 }

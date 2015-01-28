@@ -7,7 +7,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#/users">Cenfoteca</a>
+    <a class="navbar-brand" href="#/gastos/all">Finance app</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -15,19 +15,19 @@
     <ul class="nav navbar-nav">
      
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuarios <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="#/users">List</a></li>
         </ul>
       </li>
       
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Rents <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gastos <b class="caret"></b></a>
         <ul class="dropdown-menu">
 			<li><a href="#/rent/available">Available Rents</a></li>
 			<li><a href="#/rent/my">My Rents</a></li>
 			<li><a href="#/rent/create">Create</a></li>
-			<li><a href="#/rent/modify">Modify</a></li>
+			<li><a href="#/gastos/all">Gastos</a></li>
         </ul>
       </li>
       

@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class HibernateConfig {
 
     private String driverClassName = "com.mysql.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost:3306/cenfotecadb";
+    private String url = "jdbc:mysql://localhost:3306/financedb";
     private String username = "root"; 
     private String password = "mtrlnk";
     

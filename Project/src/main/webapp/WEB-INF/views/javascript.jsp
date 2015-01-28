@@ -34,6 +34,7 @@
 <script src="resources/js/controllers/RentController.js"></script>
 <script src="resources/js/controllers/RentListController.js"></script>
 <script src="resources/js/controllers/UserRentController.js"></script>
+<script src="resources/js/controllers/GastoController.js"></script>
 
 <script src="resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="resources/js/lib/ui-bootstrap-tpls-0.9.0.min.js"></script>
