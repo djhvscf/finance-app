@@ -36,20 +36,14 @@ public class GastoService implements GastoServiceInterface {
 			pr = new PageRequest(gastoRequest.getPageNumber(),gastoRequest.getPageSize());
 		}
 		
-		if (!gastoRequest.getSearchTerm().equals("")) {
-			//Implementar búsqueda
-		}
-		
 		return gastoRepository.findAll(pr);
 	}
 
 	@Override
 	@Transactional
 	public Boolean saveGasto(Gasto gasto) {
-		Gasto ngasto = gastoRepository.save(gasto);
-		
 		Boolean result = true;
-		if(ngasto == null){
+		if(gastoRepository.save(gasto) == null){
 			result = false;
 		}
 		return result;

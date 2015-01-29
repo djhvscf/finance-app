@@ -55,4 +55,16 @@ public class LayoutController {
 	{
 		return "layouts/gastosAll";
 	}
+	
+	@RequestMapping(value = "/gastos/createGastoModal")
+	public String getCreateGastoModal()
+	{
+		return "modals/createGastoModal";
+	}
+	
+	@RequestMapping(value = "/gastos/modifyGastoModal")
+	public String getModifyGastoModal()
+	{
+		return "modals/modifyGastoModal";
+	}
 }

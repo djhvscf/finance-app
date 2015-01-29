@@ -16,7 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.finance.financeapp.contracts.GastoRequest;
 import com.finance.financeapp.contracts.GastoResponse;
+import com.finance.financeapp.contracts.UsersRequest;
+import com.finance.financeapp.contracts.UsersResponse;
 import com.finance.financeapp.ejb.Gasto;
+import com.finance.financeapp.ejb.TipoUsuario;
+import com.finance.financeapp.ejb.Usuario;
 import com.finance.financeapp.pojo.GastoPOJO;
 import com.finance.financeapp.services.GastoServiceInterface;
 import com.finance.financeapp.utils.PojoUtils;
@@ -28,6 +32,7 @@ import com.finance.financeapp.utils.PojoUtils;
 public class GastoController {
 
 	private final String getAllCodeMessage = "Se obtuvieron los gastos correctamente";
+	private final String correctSaveGasto = "Se guardó el gasto correctamente";
 	
 	@Autowired
 	GastoServiceInterface gastoService;
@@ -56,5 +61,24 @@ public class GastoController {
 
 		gastoResponse.setGastos(viewGastos);
 		return gastoResponse;	
+	}
+	
+	@Path("/create")
+	@POST
+	public GastoResponse create(GastoRequest gastoRequest){	
+
+		GastoResponse us = new GastoResponse();
+		Gasto gasto = new Gasto();
+		gasto.setMonto(gastoRequest.getGasto().getMonto());		
+		gasto.setLugar(gastoRequest.getGasto().getLugar());
+		gasto.setDescripcion(gastoRequest.getGasto().getDescripcion());
+		
+		Boolean state = gastoService.saveGasto(gasto);
+		if(state){
+			us.setCode(200);
+			us.setCodeMessage(correctSaveGasto);
+		}
+		return us;
+
 	}
 }

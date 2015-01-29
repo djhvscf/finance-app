@@ -102,12 +102,11 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 		},
 		ondblClickRow: function(rowid){		
 			var data = $(grid_selector).jqGrid('getRowData', rowid);
-			$scope.requestObject.user = {};
-			$scope.requestObject.user.idUsuario = data.idUsuario;
-			$scope.requestObject.user.idTipoUsuario = data.idTipoUsuario;
-			$scope.requestObject.user.firstname = data.firstname;
-			$scope.requestObject.user.lastname = data.lastname;
-			$scope.requestObject.user.email = data.email;
+			$scope.requestObject.gasto = {};
+			$scope.requestObject.gasto.idGasto = data.idGasto;
+			$scope.requestObject.gasto.monto = data.monto;
+			$scope.requestObject.gasto.lugar = data.lugar;
+			$scope.requestObject.gasto.descripcion = data.descripcion;
 
 			$("#openEditUserModal").click();
 		},
@@ -161,11 +160,11 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 
 	$scope.open = function(type){
 		var modalInstance = $modal.open({
-			templateUrl: 'layoutservice/user/'+type+'UserModal',
+			templateUrl: 'layoutservice/gastos/'+type+'GastoModal',
 			controller: ModalInstanceCreateCtrl,
 			resolve: {
-				user: function() {
-					return $scope.requestObject.user;
+				gasto: function() {
+					return $scope.requestObject.gasto;
 				}
 			}
 		});
@@ -183,7 +182,7 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 	});
 };
 
-var ModalInstanceCreateCtrl = function ($http, $scope, $modalInstance, user) {
+var ModalInstanceCreateCtrl = function ($http, $scope, $modalInstance, gasto) {
 	$scope.requestObject = {};
 	$scope.requestObject.pageNumber = "";
 	$scope.requestObject.pageSize = 0;
@@ -192,45 +191,28 @@ var ModalInstanceCreateCtrl = function ($http, $scope, $modalInstance, user) {
 	$scope.requestObject.searchColumn = "";
 	$scope.requestObject.searchTerm = "";
 
-	$scope.requestObject.user = {};
-	$scope.requestObject.user.password = "";
-	if(user !== undefined){
-		$scope.requestObject.user.idUsuario = user.idUsuario;
-		$scope.requestObject.user.idTipoUsuario = user.idTipoUsuario;
-		$scope.requestObject.user.firstname = user.firstname;
-		$scope.requestObject.user.lastname = user.lastname;
-		$scope.requestObject.user.email = user.email;
+	$scope.requestObject.gasto = {};
+	if(gasto !== undefined){
+		$scope.requestObject.gasto.idGasto = gasto.idGasto;
+		$scope.requestObject.gasto.monto= gasto.monto;
+		$scope.requestObject.gasto.lugar= gasto.lugar;
+		$scope.requestObject.gasto.descripcion= gasto.descripcion;
 	}
 	
-	$scope.tipoUsuarioList = [];
-	$scope.EMAIL_REGEXP = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
-	
-	$scope.init = function(){
-
-		$http.get('rest/protected/tipoUsuario/getAll')
-		.success(function(response) {
-
-			$scope.tipoUsuarioList = response.tipoUsuarioList;
-			$scope.requestObject.user.idTipoUsuario = $scope.tipoUsuarioList[0].idTipoUsuario;
-
-		});
-
-	};
+	$scope.init = function(){};
 
 	$scope.init();
 
 	$scope.create = function(event) {
-		if((!user) ? this.createUserForm.$valid : this.modifyUserForm.$valid){
+		if((!gasto) ? this.createGastoForm.$valid : this.modifyGastoForm.$valid){
 			this.onError = false;
-			$http.post('rest/protected/users/create',$scope.requestObject)
+			$http.post('rest/protected/gastos/create',$scope.requestObject)
 			.success(function(response) {
-
 				if(response.code === 200){
 					$modalInstance.close();
 				}
-
 			});
-			user = null;
+			gasto = null;
 		}else{
 			this.onError = true;
 		}
