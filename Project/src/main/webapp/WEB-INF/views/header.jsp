@@ -15,19 +15,16 @@
     <ul class="nav navbar-nav">
      
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuarios <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Salarios<b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="#/users">List</a></li>
+          <li><a href="#/salarios/all">Lista de Salarios</a></li>
         </ul>
       </li>
       
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gastos <b class="caret"></b></a>
         <ul class="dropdown-menu">
-			<li><a href="#/rent/available">Available Rents</a></li>
-			<li><a href="#/rent/my">My Rents</a></li>
-			<li><a href="#/rent/create">Create</a></li>
-			<li><a href="#/gastos/all">Gastos</a></li>
+			<li><a href="#/gastos/all">Lists de Gastos</a></li>
         </ul>
       </li>
       

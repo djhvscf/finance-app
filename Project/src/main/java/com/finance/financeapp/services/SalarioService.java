@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class SalarioService implements SalarioServiceInterface {
 	
 	@Override
 	@Transactional
-	public List<Salario> getAll(SalarioRequest salarioRequest) {
+	public Page<Salario> getAll(SalarioRequest salarioRequest) {
 		PageRequest pr;
 		Sort.Direction direction = Sort.Direction.DESC;
 		if(salarioRequest.getDirection().equals("ASC")){

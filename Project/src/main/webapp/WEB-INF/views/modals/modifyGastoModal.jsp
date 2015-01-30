@@ -11,7 +11,7 @@
 				<div ng-class="{error: onError && modifyGastoModal.monto.$invalid}">
 					<label class='col-sm-3 control-label'>Monto</label>
 					<div class="col-sm-8">
-						<input type="number" id="monto" class="form-control" name="monto" placeholder="Requerido" required ng-model="requestObject.gasto.monto" />
+						<input type="text" id="monto" class="form-control" name="monto" placeholder="Requerido" required ng-model="requestObject.gasto.monto" />
 						<span ng-show="onError && modifyGastoModal.monto.$error.required" class="help-inline">Requerido</span>						
 					</div>
 				</div>
@@ -31,17 +31,18 @@
 				<div ng-class="{error: onError && modifyGastoModal.descripcion.$invalid}">
 					<label class='col-sm-3 control-label'>Descripción</label> 
 					<div class="col-sm-8">
-						<input type="text" id="descripcion" class="form-control" name="v" placeholder="Requerido" required ng-model="requestObject.gasto.descripcion" />
+						<input type="text" id="descripcion" class="form-control" name="descripcion" placeholder="Requerido" required ng-model="requestObject.gasto.descripcion" />
 						<span ng-show="onError && modifyGastoModal.descripcion.$error.required" class="help-inline">Requerido</span>
 					</div>
 				</div>
 			</div>
+			
 		</form>
 	</div>
 	
 	<div class="modal-footer">
-		<button class="btn btn-primary" ng-click="create($event)">Create</button>
-		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+		<button class="btn btn-primary" ng-click="create($event)">Modificar</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
 	</div>
 	
 </div>

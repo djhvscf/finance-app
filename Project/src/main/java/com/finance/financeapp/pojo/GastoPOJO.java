@@ -1,6 +1,5 @@
 package com.finance.financeapp.pojo;
 
-import java.util.Date;
 
 public class GastoPOJO {
 	
@@ -8,7 +7,7 @@ public class GastoPOJO {
 	private String lugar;
 	private double monto;
 	private String descripcion;
-	private Date fecha;
+	private String fecha;
 
 	public GastoPOJO() {
 		super();
@@ -73,14 +72,14 @@ public class GastoPOJO {
 	/**
 	 * @return the fecha
 	 */
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
 	/**
 	 * @param fecha the fecha to set
 	 */
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 	

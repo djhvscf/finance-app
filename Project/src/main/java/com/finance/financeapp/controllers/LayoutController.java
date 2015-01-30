@@ -32,24 +32,9 @@ public class LayoutController {
 		return "modals/modifyUserModal";
 	}
 	
-	@RequestMapping(value = "/rent/list")
-	public String getRentListLayout()
-	{
-		return "layouts/rentList";
-	}
-	
-	@RequestMapping(value = "/rent/create")
-	public String getRentCreateLayout()
-	{
-		return "layouts/rentCreate";
-	}
-	
-	@RequestMapping(value = "/rent/do")
-	public String getRentDoLayout()
-	{
-		return "layouts/rentDo";
-	}
-	
+	//****************
+	//GASTOS
+	//****************
 	@RequestMapping(value = "/gastos/all")
 	public String getGastosAllLayout()
 	{
@@ -66,5 +51,26 @@ public class LayoutController {
 	public String getModifyGastoModal()
 	{
 		return "modals/modifyGastoModal";
+	}
+	
+	//****************
+	//SALARIOS
+	//****************
+	@RequestMapping(value = "/salarios/all")
+	public String getSalariosAllLayout()
+	{
+		return "layouts/salariosAll";
+	}
+	
+	@RequestMapping(value = "/salarios/createSalarioModal")
+	public String getCreateSalarioModal()
+	{
+		return "modals/createSalarioModal";
+	}
+	
+	@RequestMapping(value = "/salarios/modifySalarioModal")
+	public String getModifySalarioModal()
+	{
+		return "modals/modifySalarioModal";
 	}
 }

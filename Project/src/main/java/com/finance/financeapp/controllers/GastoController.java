@@ -16,11 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.finance.financeapp.contracts.GastoRequest;
 import com.finance.financeapp.contracts.GastoResponse;
-import com.finance.financeapp.contracts.UsersRequest;
-import com.finance.financeapp.contracts.UsersResponse;
 import com.finance.financeapp.ejb.Gasto;
-import com.finance.financeapp.ejb.TipoUsuario;
-import com.finance.financeapp.ejb.Usuario;
 import com.finance.financeapp.pojo.GastoPOJO;
 import com.finance.financeapp.services.GastoServiceInterface;
 import com.finance.financeapp.utils.PojoUtils;
@@ -29,7 +25,7 @@ import com.finance.financeapp.utils.PojoUtils;
 @Path("/protected/gastos")
 @Consumes({ MediaType.APPLICATION_JSON })
 @Produces({ MediaType.APPLICATION_JSON })
-public class GastoController {
+public class GastoController extends BaseController{
 
 	private final String getAllCodeMessage = "Se obtuvieron los gastos correctamente";
 	private final String correctSaveGasto = "Se guardó el gasto correctamente";
@@ -47,7 +43,7 @@ public class GastoController {
 
 		GastoResponse gastoResponse = new GastoResponse();
 
-		gastoResponse.setCode(200);
+		gastoResponse.setCode(successCode);
 		gastoResponse.setCodeMessage(getAllCodeMessage);
 		gastoResponse.setTotalElements(gastos.getTotalElements());
 		gastoResponse.setTotalPages(gastos.getTotalPages());
@@ -63,22 +59,22 @@ public class GastoController {
 		return gastoResponse;	
 	}
 	
-	@Path("/create")
+	@Path("/save")
 	@POST
-	public GastoResponse create(GastoRequest gastoRequest){	
+	public GastoResponse save(GastoRequest gastoRequest){	
 
-		GastoResponse us = new GastoResponse();
+		GastoResponse gastoResponse = new GastoResponse();
 		Gasto gasto = new Gasto();
+		gasto.setIdGasto(gastoRequest.getGasto().getIdGasto());
 		gasto.setMonto(gastoRequest.getGasto().getMonto());		
 		gasto.setLugar(gastoRequest.getGasto().getLugar());
 		gasto.setDescripcion(gastoRequest.getGasto().getDescripcion());
+		gasto.setFecha(getDate());
 		
-		Boolean state = gastoService.saveGasto(gasto);
-		if(state){
-			us.setCode(200);
-			us.setCodeMessage(correctSaveGasto);
+		if(gastoService.saveGasto(gasto)){
+			gastoResponse.setCode(successCode);
+			gastoResponse.setCodeMessage(correctSaveGasto);
 		}
-		return us;
-
+		return gastoResponse;
 	}
 }

@@ -4,7 +4,7 @@
  * Users
  * @constructor
  */
-var GastoController = function($scope, $http,$location,$modal,$log) {
+var SalarioController = function($scope, $http,$location,$modal,$log) {
    
 	$scope.requestObject = {};
 	$scope.requestObject.pageNumber = 1;
@@ -20,32 +20,28 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
     
     $scope.init();
     
-    var grid_selector = "#gastosList";
-	var pager_selector = "#gastosPager";
+    var grid_selector = "#salariosList";
+	var pager_selector = "#salariosPager";
 
     $(grid_selector).jqGrid(
 	{
-		url : 'rest/protected/gastos/getAll',
+		url : 'rest/protected/salarios/getAll',
 		datatype: "json",
 		mtype: "POST",
 		ajaxGridOptions: { contentType: 'application/json; charset=utf-8' },
 		ajaxRowOptions: { contentType: "application/json; charset=utf-8", dataType: "json" },
 		postData: JSON.stringify($scope.requestObject),
-		colNames : [ 'Id Gasto', 'Monto', 'Lugar', 'Descripción', 'Fecha'],
+		colNames : [ 'Id Salario', 'Monto', 'Fecha'],
 		colModel : [ {
-			name : 'idGasto',
+			name : 'idSalario',
 			hidden: true
 		}, {
 			name : 'monto'
 		}, {
-			name : 'lugar'
-		}, {
-			name : 'descripcion'
-		}, {
 			name : 'fecha'
 		}],
 		jsonReader : {
-	    	root:"gastos",
+	    	root:"salarios",
 	        page:  $scope.requestObject.pageNumber,
 	        total: function (obj) {
 
@@ -102,14 +98,12 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 		},
 		ondblClickRow: function(rowid){		
 			var data = $(grid_selector).jqGrid('getRowData', rowid);
-			$scope.requestObject.gasto = {};
-			$scope.requestObject.gasto.idGasto = data.idGasto;
-			$scope.requestObject.gasto.monto = data.monto;
-			$scope.requestObject.gasto.lugar = data.lugar;
-			$scope.requestObject.gasto.descripcion = data.descripcion;
-			$scope.requestObject.gasto.fecha = data.fecha;
+			$scope.requestObject.salario = {};
+			$scope.requestObject.salario.idSalario = data.idSalario;
+			$scope.requestObject.salario.monto = data.monto;
+			$scope.requestObject.salario.fecha = data.fecha;
 
-			$("#openModifyGastoModal").click();
+			$("#openModifySalarioModal").click();
 		},
 		rowNum : 10,
 		rowList : [ 10, 20, 30 ],
@@ -117,7 +111,7 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 		sortname : 'id',
 		viewrecords : true,
 		sortorder : "desc",
-		caption : "Gastos",
+		caption : "Salarios",
 		loadComplete : function() {
 			var table = this;
 			setTimeout(function(){
@@ -134,7 +128,7 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 	});
 
 	function enableTooltips(table) {
-		$('#add_gastosList')[0].title = "Agregar gasto";
+		$('#add_salariosList')[0].title = "Agregar salario";
 	}
 
 	$scope.setSearchColumn = function(searchValue,event){
@@ -148,23 +142,23 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 	};
 
 	$(window).bind('resize', function() {
-		$("#gastosList").setGridWidth($(window).width()-300);
+		$("#salariosList").setGridWidth($(window).width()-300);
 	}).trigger('resize');
 
 
 	//CUSTOM ACTIONS
-	$("#add_gastosList .ui-pg-div").click(function(ev){
+	$("#add_salariosList .ui-pg-div").click(function(ev){
 		ev.preventDefault();
 		return false;
 	});
 
 	$scope.open = function(type){
 		var modalInstance = $modal.open({
-			templateUrl: 'layoutservice/gastos/'+type+'GastoModal',
-			controller: ModalInstanceCreateGastoCtrl,
+			templateUrl: 'layoutservice/salarios/'+type+'SalarioModal',
+			controller: ModalInstanceCreateSalarioCtrl,
 			resolve: {
-				gasto: function() {
-					return $scope.requestObject.gasto;
+				salario: function() {
+					return $scope.requestObject.salario;
 				},
 				type: function() {
 					return type;
@@ -180,12 +174,12 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 
 	};
 
-	$("#add_gastosList .ui-pg-div").click(function(ev){
-		$("#openAddNewGastoModal").click();
+	$("#add_salariosList .ui-pg-div").click(function(ev){
+		$("#openAddNewSalarioModal").click();
 	});
 };
 
-var ModalInstanceCreateGastoCtrl = function ($http, $scope, $modalInstance, gasto, type) {
+var ModalInstanceCreateSalarioCtrl = function ($http, $scope, $modalInstance, salario, type) {
 	$scope.requestObject = {};
 	$scope.requestObject.pageNumber = "";
 	$scope.requestObject.pageSize = 0;
@@ -194,26 +188,24 @@ var ModalInstanceCreateGastoCtrl = function ($http, $scope, $modalInstance, gast
 	$scope.requestObject.searchColumn = "";
 	$scope.requestObject.searchTerm = "";
 
-	$scope.requestObject.gasto = {};
+	$scope.requestObject.salario = {};
 	
 	$scope.init = function() {
-		if(gasto !== undefined && type === 'modify'){
-			$scope.requestObject.gasto.idGasto = gasto.idGasto;
-			$scope.requestObject.gasto.monto = gasto.monto;
-			$scope.requestObject.gasto.lugar = gasto.lugar;
-			$scope.requestObject.gasto.descripcion = gasto.descripcion;
+		if(salario !== undefined && type === 'modify'){
+			$scope.requestObject.salario.idSalario = salario.idSalario;
+			$scope.requestObject.salario.monto = salario.monto;
 		} else {
-			gasto = null;
+			salario = null;
 		}
 	};
 
 	$scope.create = function(event) {
-		if((gasto === null) ? this.createGastoModal.$valid : this.modifyGastoModal.$valid){
+		if((salario === null) ? this.createSalarioModal.$valid : this.modifySalarioModal.$valid){
 			this.onError = false;
-			$http.post('rest/protected/gastos/save',$scope.requestObject)
+			$http.post('rest/protected/salarios/save',$scope.requestObject)
 			.success(function(response) {
 				if(response.code === 200){
-					gasto = null;
+					salario = null;
 					$modalInstance.close();
 				}
 			});

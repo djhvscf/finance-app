@@ -8,32 +8,17 @@ var App = angular.module('Finance', ['Finance.filters', 'Finance.services',
 // Declare app level module which depends on filters, and services
 App.config(function ($routeProvider,$provide,$httpProvider) {
 	
-	$routeProvider.when('/users', {
-        templateUrl: 'layoutservice/userslayout',
-        controller: UsersController
-    });
-	
-	$routeProvider.when('/rent/available', {
-        templateUrl: 'layoutservice/rent/list',
-        controller: RentListController
-    });
-	
-	$routeProvider.when('/rent/my', {
-        templateUrl: 'layoutservice/rent/do',
-        controller: UserRentController
-    });
-	
-	$routeProvider.when('/rent/create', {
-        templateUrl: 'layoutservice/rent/create',
-        controller: RentController
-    });
-	
 	$routeProvider.when('/gastos/all', {
         templateUrl: 'layoutservice/gastos/all',
         controller: GastoController
     });
 	
-	$routeProvider.otherwise({redirectTo: '/users'});
+	$routeProvider.when('/salarios/all', {
+        templateUrl: 'layoutservice/salarios/all',
+        controller: SalarioController
+    });
+	
+	$routeProvider.otherwise({redirectTo: '/gastos'});
 	
 	//RESPONSE INTERCEPTOR FOR ALL THE ANGULAR CALLS
 	$provide.factory('responseHttpInterceptor', function($q) {

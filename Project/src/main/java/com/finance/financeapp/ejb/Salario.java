@@ -1,7 +1,6 @@
 package com.finance.financeapp.ejb;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +16,7 @@ public class Salario implements Serializable{
 	@GeneratedValue( strategy = GenerationType.AUTO)
 	private int idSalario;
 	
-	private Date fecha;
+	private String fecha;
 	private double monto;
 	
 	public Salario() {
@@ -41,14 +40,14 @@ public class Salario implements Serializable{
 	/**
 	 * @return the fecha
 	 */
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
 	/**
 	 * @param fecha the fecha to set
 	 */
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 

@@ -3,6 +3,7 @@ package com.finance.financeapp.repositories;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
@@ -12,7 +13,7 @@ public interface SalarioRepository extends CrudRepository<Salario,Integer> {
 
 	public static final int PAGE_SIZE = 5;
 	
-	List<Salario> findAll(Pageable pageable);
+	Page<Salario> findAll(Pageable pageable);
 	List<Salario> findByMonto (double monto);
 	List<Salario> findByFecha (Date fecha);
 	

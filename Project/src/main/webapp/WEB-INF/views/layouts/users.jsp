@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<head><title>Cenfoteca | Users</title></head>
+<head><title>Finance app | Usuarios</title></head>
 
 <div class="usersGeneralContainer">
 

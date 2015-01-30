@@ -7,7 +7,7 @@
 
 var LoginController = function($scope, $http,$location) {
    
-	$scope.user = {email:"gerardo@parajeles.com",password:"maruja"};
+	$scope.user = {email:"dennis@sophy.com",password:"sopden"};
 	
     $scope.init = function() {
     };
@@ -18,7 +18,7 @@ var LoginController = function($scope, $http,$location) {
     			var usuario = {"idUser":loginResponse.idUsuario,"firstName":loginResponse.firstName,"lastName":loginResponse.lastName};
     			$.jStorage.set("user",usuario);
     		
-    			var path = "/finance/app#/users";
+    			var path = "/finance/app#/gastos/all";
     			window.location.href = path;
     			
     		}

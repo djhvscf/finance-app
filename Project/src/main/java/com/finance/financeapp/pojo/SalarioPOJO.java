@@ -1,11 +1,10 @@
 package com.finance.financeapp.pojo;
 
-import java.util.Date;
 
 public class SalarioPOJO {
 
 	private int idSalario;
-	private Date fecha;
+	private String fecha;
 	private double monto;
 	
 	public SalarioPOJO() {
@@ -29,14 +28,14 @@ public class SalarioPOJO {
 	/**
 	 * @return the fecha
 	 */
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
 	/**
 	 * @param fecha the fecha to set
 	 */
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
