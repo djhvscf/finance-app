@@ -17,7 +17,7 @@ public class Salario implements Serializable{
 	private int idSalario;
 	
 	private String fecha;
-	private double monto;
+	private Float monto;
 	
 	public Salario() {
 		super();
@@ -54,14 +54,14 @@ public class Salario implements Serializable{
 	/**
 	 * @return the monto
 	 */
-	public double getMonto() {
+	public Float getMonto() {
 		return monto;
 	}
 
 	/**
 	 * @param monto the monto to set
 	 */
-	public void setMonto(double monto) {
+	public void setMonto(Float monto) {
 		this.monto = monto;
 	}
 }

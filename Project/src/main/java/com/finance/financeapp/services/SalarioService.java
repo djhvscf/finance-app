@@ -1,6 +1,5 @@
 package com.finance.financeapp.services;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class SalarioService implements SalarioServiceInterface {
 		if(salarioRequest.getDirection().equals("ASC")){
 			direction = Sort.Direction.ASC;
 		}
-		
+
 		if(salarioRequest.getSortBy().size() > 0){
 			Sort sort = new Sort(direction,salarioRequest.getSortBy());
 			pr = new PageRequest(salarioRequest.getPageNumber(),salarioRequest.getPageSize(),sort);
@@ -52,13 +51,13 @@ public class SalarioService implements SalarioServiceInterface {
 	}
 
 	@Override
-	public List<Salario> getByFecha(Date fecha) {
+	public List<Salario> getByFecha(String fecha) {
 		return salarioRepository.findByFecha(fecha);
 	}
 
 	@Override
-	public List<Salario> getByMonto(double monto) {
-		return salarioRepository.findByMonto(monto);
+	public List<Salario> getByMonto(Float monto) {
+		return salarioRepository.findByMontoBetween(0, monto);
 	}
 
 	@Override

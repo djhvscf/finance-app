@@ -5,7 +5,7 @@ public class SalarioPOJO {
 
 	private int idSalario;
 	private String fecha;
-	private double monto;
+	private Float monto;
 	
 	public SalarioPOJO() {
 		super();
@@ -42,14 +42,14 @@ public class SalarioPOJO {
 	/**
 	 * @return the monto
 	 */
-	public double getMonto() {
+	public Float getMonto() {
 		return monto;
 	}
 
 	/**
 	 * @param monto the monto to set
 	 */
-	public void setMonto(double monto) {
+	public void setMonto(Float monto) {
 		this.monto = monto;
 	}
 }

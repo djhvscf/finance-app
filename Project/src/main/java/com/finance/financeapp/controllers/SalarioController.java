@@ -38,21 +38,35 @@ public class SalarioController extends BaseController{
 	public SalarioResponse getAll(SalarioRequest salarioRequest){
 		
 		salarioRequest.setPageNumber(salarioRequest.getPageNumber() - 1);
-		Page<Salario> salarios = salarioService.getAll(salarioRequest);
-
+		Page<Salario> salarios = null;
 		SalarioResponse salarioResponse = new SalarioResponse();
-
+		List<SalarioPOJO> viewSalarios = new ArrayList<SalarioPOJO>();
+		List<Salario> salariosList;
+		if(!salarioRequest.getSearchTerm().equals("")) {
+			if(salarioRequest.getSearchColumn().equals("Fecha")) {
+				salariosList = salarioService.getByFecha(salarioRequest.getSearchTerm());
+			} else {
+				salariosList = salarioService.getByMonto(Float.parseFloat(salarioRequest.getSearchTerm()));
+			}
+			
+			for (Salario salario : salariosList){
+				SalarioPOJO nsalario = new SalarioPOJO();
+				PojoUtils.pojoMappingUtility(nsalario,salario);
+				viewSalarios.add(nsalario);
+			}
+		} else {
+			salarios = salarioService.getAll(salarioRequest);
+			for (Salario salario : salarios.getContent()){
+				SalarioPOJO nsalario = new SalarioPOJO();
+				PojoUtils.pojoMappingUtility(nsalario,salario);
+				viewSalarios.add(nsalario);
+			}
+			salarioResponse.setTotalElements(salarios.getTotalElements());
+			salarioResponse.setTotalPages(salarios.getTotalPages());
+		}
+		
 		salarioResponse.setCode(successCode);
 		salarioResponse.setCodeMessage(getAllCodeMessage);
-		salarioResponse.setTotalElements(salarios.getTotalElements());
-		salarioResponse.setTotalPages(salarios.getTotalPages());
-
-		List<SalarioPOJO> viewSalarios = new ArrayList<SalarioPOJO>();
-		for (Salario salario : salarios.getContent()){
-			SalarioPOJO nsalario = new SalarioPOJO();
-			PojoUtils.pojoMappingUtility(nsalario,salario);
-			viewSalarios.add(nsalario);
-		}
 
 		salarioResponse.setSalarios(viewSalarios);
 		return salarioResponse;	
