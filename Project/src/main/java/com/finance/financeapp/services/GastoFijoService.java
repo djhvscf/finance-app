@@ -8,6 +8,7 @@ import com.finance.financeapp.ejb.GastoFijo;
 import com.finance.financeapp.repositories.GastoFijoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class GastoFijoService implements GastoFijoServiceInterface {
 	
 	@Override
 	@Transactional
-	public List<GastoFijo> getAll(GastoFijoRequest gastoFijoRequest) {
+	public Page<GastoFijo> getAll(GastoFijoRequest gastoFijoRequest) {
 		PageRequest pr;
 		Sort.Direction direction = Sort.Direction.DESC;
 		if(gastoFijoRequest.getDirection().equals("ASC")){

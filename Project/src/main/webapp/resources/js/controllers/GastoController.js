@@ -130,7 +130,9 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
     jQuery(grid_selector).jqGrid('navGrid', pager_selector, {
 		edit : false,
 		add : true,
-		del : false
+		del : false,
+		search: false,
+		refresh: false
 	});
 
 	function enableTooltips(table) {

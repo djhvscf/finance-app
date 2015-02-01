@@ -1,6 +1,5 @@
 package com.finance.financeapp.services;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +59,7 @@ public class GastoService implements GastoServiceInterface {
 	}
 
 	@Override
-	public List<Gasto> getByFecha(Date fecha) {
+	public List<Gasto> getByFecha(String fecha) {
 		return gastoRepository.findByFecha(fecha);
 	}
 

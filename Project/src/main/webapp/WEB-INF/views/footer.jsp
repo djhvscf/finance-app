@@ -3,12 +3,12 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="col-md-8">
-        <a href="#">Terms of Service</a>    
-        <a href="#">Privacy</a>    
-        <a href="#">Security</a>
+        <a href="#"></a>    
+        <a href="#"></a>    
+        <a href="#">y</a>
       </div>
       <div class="col-md-4">
-        <p class="muted pull-right">© 2013 Universidad Cenfotec. All rights reserved</p>
+        <p class="muted pull-right"></p>
       </div>
     </div>
   </div>

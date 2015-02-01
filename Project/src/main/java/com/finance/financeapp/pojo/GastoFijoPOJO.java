@@ -1,13 +1,12 @@
 package com.finance.financeapp.pojo;
 
-import java.util.Date;
 
 public class GastoFijoPOJO {
 
 	private int idGastoFijo;
 	private String nombre;
 	private double monto;
-	private Date posibleFechaPago;
+	private String posibleFechaPago;
 	
 	public GastoFijoPOJO() {
 		super();
@@ -58,14 +57,14 @@ public class GastoFijoPOJO {
 	/**
 	 * @return the posibleFechaPago
 	 */
-	public Date getPosibleFechaPago() {
+	public String getPosibleFechaPago() {
 		return posibleFechaPago;
 	}
 
 	/**
 	 * @param posibleFechaPago the posibleFechaPago to set
 	 */
-	public void setPosibleFechaPago(Date posibleFechaPago) {
+	public void setPosibleFechaPago(String posibleFechaPago) {
 		this.posibleFechaPago = posibleFechaPago;
 	}
 	

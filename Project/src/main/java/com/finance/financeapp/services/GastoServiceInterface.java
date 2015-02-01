@@ -1,6 +1,5 @@
 package com.finance.financeapp.services;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -14,6 +13,6 @@ public interface GastoServiceInterface {
 	Boolean saveGasto(Gasto gasto);
 	List<Gasto> getByMonto(double monto);
 	List<Gasto> getByLugar(String lugar);
-	List<Gasto> getByFecha(Date fecha);
+	List<Gasto> getByFecha(String fecha);
 	Gasto getByIdGasto(int idGasto);
 }

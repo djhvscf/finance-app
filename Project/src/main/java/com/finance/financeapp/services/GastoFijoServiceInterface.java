@@ -3,12 +3,14 @@ package com.finance.financeapp.services;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.finance.financeapp.contracts.GastoFijoRequest;
 import com.finance.financeapp.ejb.GastoFijo;
 
 public interface GastoFijoServiceInterface {
 
-	List<GastoFijo> getAll(GastoFijoRequest gastoFijoRequest);
+	Page<GastoFijo> getAll(GastoFijoRequest gastoFijoRequest);
 	Boolean saveGastoFijo (GastoFijo gastoFijo);
 	List<GastoFijo> getByNombre (String nombre);
 	List<GastoFijo> getByMonto (double monto);

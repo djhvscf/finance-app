@@ -1,6 +1,5 @@
 package com.finance.financeapp.repositories;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -16,6 +15,6 @@ public interface GastoRepository extends CrudRepository<Gasto,Integer>  {
 	Page<Gasto> findAll(Pageable pageable);
 	List<Gasto> findByMonto(double monto);
 	List<Gasto> findByLugarContaining(String lugar);
-	List<Gasto> findByFecha(Date fecha);
+	List<Gasto> findByFecha(String fecha);
 	Gasto findOne(Integer idGasto);
 }
