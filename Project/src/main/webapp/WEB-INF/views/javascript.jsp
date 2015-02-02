@@ -36,6 +36,7 @@
 <script src="resources/js/controllers/UserRentController.js"></script>
 <script src="resources/js/controllers/GastoController.js"></script>
 <script src="resources/js/controllers/SalarioController.js"></script>
+<script src="resources/js/controllers/GastoFijoController.js"></script>
 
 
 <script src="resources/bootstrap/js/bootstrap.min.js"></script>

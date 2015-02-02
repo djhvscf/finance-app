@@ -28,6 +28,13 @@
         </ul>
       </li>
       
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gastos Fijos <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+			<li><a href="#/gastosFijos/all">Lists de Gastos Fijos</a></li>
+        </ul>
+      </li>
+      
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>

@@ -33,38 +33,19 @@ public class Usuario implements Serializable{
 	private Integer idTipoUsuario;
 	
 	//RELATIONSHIPS
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="TipoUsuario_idTipoUsuario")
-	private TipoUsuario tipoUsuario;
-	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(
-		name="Usuario_has_Alquiler"
-		, joinColumns={
-			@JoinColumn(name="Usuario_idUsuario")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="Alquiler_idAlquiler")
-			}
-		)
-	private List<Alquiler> alquileres;
-
 	public Usuario() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Usuario(int idUsuario, String firstname, String lastname,
-			String email, String password, TipoUsuario tipoUsuario,
-			List<Alquiler> alquileres) {
+			String email, String password) {
 		super();
 		this.idUsuario = idUsuario;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.password = password;
-		this.tipoUsuario = tipoUsuario;
-		this.alquileres = alquileres;
 	}
 
 	public int getIdUsuario() {
@@ -105,22 +86,6 @@ public class Usuario implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public TipoUsuario getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	public void setTipoUsuario(TipoUsuario tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
-	}
-
-	public List<Alquiler> getAlquileres() {
-		return alquileres;
-	}
-
-	public void setAlquileres(List<Alquiler> alquileres) {
-		this.alquileres = alquileres;
 	}
 
 	public Integer getIdTipoUsuario() {

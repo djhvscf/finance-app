@@ -18,6 +18,11 @@ App.config(function ($routeProvider,$provide,$httpProvider) {
         controller: SalarioController
     });
 	
+	$routeProvider.when('/gastosFijos/all', {
+		templateUrl: 'layoutservice/gastosFijos/all',
+		controller: GastoFijoController
+	});
+	
 	$routeProvider.otherwise({redirectTo: '/gastos'});
 	
 	//RESPONSE INTERCEPTOR FOR ALL THE ANGULAR CALLS

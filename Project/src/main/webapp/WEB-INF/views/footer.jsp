@@ -5,7 +5,7 @@
       <div class="col-md-8">
         <a href="#"></a>    
         <a href="#"></a>    
-        <a href="#">y</a>
+        <a href="#"></a>
       </div>
       <div class="col-md-4">
         <p class="muted pull-right"></p>

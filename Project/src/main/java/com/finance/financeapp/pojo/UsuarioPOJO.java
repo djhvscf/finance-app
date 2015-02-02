@@ -7,7 +7,6 @@ public class UsuarioPOJO{
 	private String lastname;
 	private String email;
 	private String password;
-	private Integer idTipoUsuario;
 	
 	public UsuarioPOJO() {
 		super();
@@ -52,13 +51,5 @@ public class UsuarioPOJO{
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Integer getIdTipoUsuario() {
-		return idTipoUsuario;
-	}
-
-	public void setIdTipoUsuario(Integer idTipoUsuario) {
-		this.idTipoUsuario = idTipoUsuario;
 	}
 }

@@ -1,6 +1,5 @@
 package com.finance.financeapp.services;
 
-import java.util.Date;
 import java.util.List;
 
 import com.finance.financeapp.contracts.GastoFijoRequest;
@@ -61,7 +60,7 @@ public class GastoFijoService implements GastoFijoServiceInterface {
 	}
 
 	@Override
-	public List<GastoFijo> getByPosibleFechaPago(Date fecha) {
+	public List<GastoFijo> getByPosibleFechaPago(String fecha) {
 		return gastoFijoRepository.findByPosibleFechaPago(fecha);
 	}
 

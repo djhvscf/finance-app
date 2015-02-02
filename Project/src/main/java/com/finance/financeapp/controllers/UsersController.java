@@ -17,11 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.finance.financeapp.contracts.UsersRequest;
 import com.finance.financeapp.contracts.UsersResponse;
-import com.finance.financeapp.ejb.TipoUsuario;
 import com.finance.financeapp.ejb.Usuario;
 import com.finance.financeapp.pojo.UsuarioPOJO;
 import com.finance.financeapp.services.GeneralServiceInterface;
-import com.finance.financeapp.services.RentServiceInterface;
 import com.finance.financeapp.services.UsersServiceInterface;
 import com.finance.financeapp.utils.PojoUtils;
 
@@ -40,9 +38,6 @@ public class UsersController {
 
 	@Autowired
 	GeneralServiceInterface generalService;
-
-	@Autowired
-	RentServiceInterface rentService;
 
 	@Autowired
 	HttpServletRequest request;
@@ -78,15 +73,13 @@ public class UsersController {
 	public UsersResponse create(UsersRequest ur){	
 
 		UsersResponse us = new UsersResponse();
-		TipoUsuario tp = generalService.getTipoUsuarioById(ur.getUser().getIdTipoUsuario());
 		Usuario user = new Usuario();
 		user.setIdUsuario(ur.getUser().getIdUsuario());		
 		user.setFirstname(ur.getUser().getFirstname());
 		user.setLastname(ur.getUser().getLastname());
 		user.setEmail(ur.getUser().getEmail());
 		user.setPassword(ur.getUser().getPassword());
-		user.setTipoUsuario(tp);
-
+		
 		Boolean state = usersService.saveUser(user);
 		if(state){
 			us.setCode(200);

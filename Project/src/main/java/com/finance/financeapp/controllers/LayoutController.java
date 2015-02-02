@@ -73,4 +73,25 @@ public class LayoutController {
 	{
 		return "modals/modifySalarioModal";
 	}
+	
+	//****************
+	//GASTOS FIJOS
+	//****************
+	@RequestMapping(value = "/gastosFijos/all")
+	public String getGastosFijosAllLayout()
+	{
+		return "layouts/gastosFijosAll";
+	}
+	
+	@RequestMapping(value = "/gastosFijos/createGastoFijoModal")
+	public String getCreateGastoFijoModal()
+	{
+		return "modals/createGastoFijoModal";
+	}
+	
+	@RequestMapping(value = "/gastosFijos/modifyGastoFijoModal")
+	public String getModifyGastoFijoModal()
+	{
+		return "modals/modifyGastoFijoModal";
+	}
 }

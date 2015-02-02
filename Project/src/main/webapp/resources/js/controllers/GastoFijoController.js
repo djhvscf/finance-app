@@ -31,10 +31,12 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 		ajaxGridOptions: { contentType: 'application/json; charset=utf-8' },
 		ajaxRowOptions: { contentType: "application/json; charset=utf-8", dataType: "json" },
 		postData: JSON.stringify($scope.requestObject),
-		colNames : [ 'Id Gasto Fijo', 'Monto', 'Fecha'],
+		colNames : [ 'Id Gasto Fijo', 'Nombre', 'Monto', 'Fecha'],
 		colModel : [ {
 			name : 'idGastoFijo',
 			hidden: true
+		}, {
+			name : 'nombre'
 		}, {
 			name : 'monto'
 		}, {
@@ -98,12 +100,11 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 		},
 		ondblClickRow: function(rowid){		
 			var data = $(grid_selector).jqGrid('getRowData', rowid);
-			$scope.requestObject.gasto = {};
-			$scope.requestObject.gasto.idGasto = data.idGasto;
-			$scope.requestObject.gasto.monto = data.monto;
-			$scope.requestObject.gasto.lugar = data.lugar;
-			$scope.requestObject.gasto.descripcion = data.descripcion;
-			$scope.requestObject.gasto.fecha = data.fecha;
+			$scope.requestObject.gastoFijo = {};
+			$scope.requestObject.gastoFijo.idGastoFijo = data.idGastoFijo;
+			$scope.requestObject.gastoFijo.monto = data.monto;
+			$scope.requestObject.gastoFijo.nombre = data.nombre;
+			$scope.requestObject.gastoFijo.posibleFechaPago = data.posibleFechaPago;
 
 			$("#openModifyGastoFijoModal").click();
 		},
@@ -158,11 +159,11 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 
 	$scope.open = function(type){
 		var modalInstance = $modal.open({
-			templateUrl: 'layoutservice/gastosFijos/'+type+'GastoModal',
+			templateUrl: 'layoutservice/gastosFijos/'+type+'GastoFijoModal',
 			controller: ModalInstanceCreateGastoFijoCtrl,
 			resolve: {
-				gasto: function() {
-					return $scope.requestObject.gasto;
+				gastoFijo: function() {
+					return $scope.requestObject.gastoFijo;
 				},
 				type: function() {
 					return type;
@@ -198,7 +199,9 @@ var ModalInstanceCreateGastoFijoCtrl = function ($http, $scope, $modalInstance, 
 		if(gastoFijo !== undefined && type === 'modify'){
 			$scope.requestObject.gastoFijo.idGastoFijo = gastoFijo.idGastoFijo;
 			$scope.requestObject.gastoFijo.monto = gastoFijo.monto;
+			$scope.requestObject.gastoFijo.nombre = gastoFijo.nombre;
 			$scope.requestObject.gastoFijo.posibleFechaPago = gasto.posibleFechaPago;
+			
 		} else {
 			gastoFijo = null;
 		}
