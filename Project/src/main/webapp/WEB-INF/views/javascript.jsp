@@ -31,9 +31,6 @@
 <script src="resources/js/services.js"></script>
 
 <script src="resources/js/controllers/UsersController.js"></script>
-<script src="resources/js/controllers/RentController.js"></script>
-<script src="resources/js/controllers/RentListController.js"></script>
-<script src="resources/js/controllers/UserRentController.js"></script>
 <script src="resources/js/controllers/GastoController.js"></script>
 <script src="resources/js/controllers/SalarioController.js"></script>
 <script src="resources/js/controllers/GastoFijoController.js"></script>

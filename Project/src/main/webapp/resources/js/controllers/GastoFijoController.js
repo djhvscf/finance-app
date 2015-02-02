@@ -200,7 +200,7 @@ var ModalInstanceCreateGastoFijoCtrl = function ($http, $scope, $modalInstance, 
 			$scope.requestObject.gastoFijo.idGastoFijo = gastoFijo.idGastoFijo;
 			$scope.requestObject.gastoFijo.monto = gastoFijo.monto;
 			$scope.requestObject.gastoFijo.nombre = gastoFijo.nombre;
-			$scope.requestObject.gastoFijo.posibleFechaPago = gasto.posibleFechaPago;
+			$scope.requestObject.gastoFijo.posibleFechaPago = gastoFijo.posibleFechaPago;
 			
 		} else {
 			gastoFijo = null;
