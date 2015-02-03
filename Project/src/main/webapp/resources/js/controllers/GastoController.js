@@ -130,7 +130,7 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
     jQuery(grid_selector).jqGrid('navGrid', pager_selector, {
 		edit : false,
 		add : true,
-		del : false,
+		del : true,
 		search: false,
 		refresh: false
 	});
@@ -159,6 +159,11 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 		ev.preventDefault();
 		return false;
 	});
+	
+	$("#del_gastosList .ui-pg-div").click(function(ev){
+		ev.preventDefault();
+		return false;
+	});
 
 	$scope.open = function(type){
 		var modalInstance = $modal.open({
@@ -184,6 +189,10 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 
 	$("#add_gastosList .ui-pg-div").click(function(ev){
 		$("#openAddNewGastoModal").click();
+	});
+	
+	$("#del_gastosList .ui-pg-div").click(function(ev){
+		
 	});
 };
 
