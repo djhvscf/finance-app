@@ -29,7 +29,6 @@
 		<table id="gastosList"></table> 
 		<div id="gastosPager"></div>
 	</div>
-	
 	<button type="button" id="openAddNewGastoModal" class="hide btn btn-default" ng-click="open('create')">D</button>
 	<button type="button" id="openModifyGastoModal" class="hide btn btn-default" ng-click="open('modify')">E</button>
 </div>

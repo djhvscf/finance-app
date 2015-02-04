@@ -31,14 +31,14 @@ var SalarioController = function($scope, $http,$location,$modal,$log) {
 		ajaxGridOptions: { contentType: 'application/json; charset=utf-8' },
 		ajaxRowOptions: { contentType: "application/json; charset=utf-8", dataType: "json" },
 		postData: JSON.stringify($scope.requestObject),
-		colNames : [ 'Id Salario', 'Monto', 'Fecha'],
+		colNames : [ 'Id Salario', 'Fecha', 'Monto'],
 		colModel : [ {
 			name : 'idSalario',
 			hidden: true
 		}, {
-			name : 'monto'
-		}, {
 			name : 'fecha'
+		}, {
+			name : 'monto'
 		}],
 		jsonReader : {
 	    	root:"salarios",
@@ -108,15 +108,18 @@ var SalarioController = function($scope, $http,$location,$modal,$log) {
 		rowNum : 10,
 		rowList : [ 10, 20, 30 ],
 		pager : pager_selector,
-		sortname : 'id',
+		sortname : 'fecha',
 		viewrecords : true,
 		sortorder : "desc",
 		caption : "Salarios",
+		footerrow: true,
 		loadComplete : function() {
 			var table = this;
 			setTimeout(function(){
-				//updatePagerIcons(table);
 				enableTooltips(table);
+				var grid = $(grid_selector),
+				sum = grid.jqGrid('getCol', 'monto', false, 'sum');
+				grid.jqGrid('footerData','set', {fecha: 'Total:', monto: sum});
 			}, 0);
 		}
 	});

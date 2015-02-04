@@ -111,16 +111,19 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 		rowNum : 10,
 		rowList : [ 10, 20, 30 ],
 		pager : pager_selector,
-		sortname : 'id',
+		sortname : 'nombre',
 		viewrecords : true,
 		sortorder : "desc",
 		caption : "Gastos Fijos",
+		footerrow: true,
 		loadComplete : function() {
 			var table = this;
 			setTimeout(function(){
-				//updatePagerIcons(table);
 				enableTooltips(table);
-			}, 0);
+				var grid = $(grid_selector),
+				sum = grid.jqGrid('getCol', 'monto', false, 'sum');
+				grid.jqGrid('footerData','set', {nombre: 'Total:', monto: sum});
+			}, 1);
 		}
 	});
 

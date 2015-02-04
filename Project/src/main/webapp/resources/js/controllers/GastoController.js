@@ -13,6 +13,7 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 	$scope.requestObject.sortBy = [];
 	$scope.requestObject.searchColumn = "ALL";
 	$scope.requestObject.searchTerm = "";
+	$scope.total = 0;
 
     $scope.init = function() {
     	
@@ -31,14 +32,14 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 		ajaxGridOptions: { contentType: 'application/json; charset=utf-8' },
 		ajaxRowOptions: { contentType: "application/json; charset=utf-8", dataType: "json" },
 		postData: JSON.stringify($scope.requestObject),
-		colNames : [ 'Id Gasto', 'Monto', 'Lugar', 'Descripción', 'Fecha'],
+		colNames : [ 'Id Gasto', 'Lugar', 'Monto', 'Descripción', 'Fecha'],
 		colModel : [ {
 			name : 'idGasto',
 			hidden: true
 		}, {
-			name : 'monto'
-		}, {
 			name : 'lugar'
+		}, {
+			name : 'monto'
 		}, {
 			name : 'descripcion'
 		}, {
@@ -114,16 +115,19 @@ var GastoController = function($scope, $http,$location,$modal,$log) {
 		rowNum : 10,
 		rowList : [ 10, 20, 30 ],
 		pager : pager_selector,
-		sortname : 'id',
+		sortname : 'fecha',
 		viewrecords : true,
 		sortorder : "desc",
 		caption : "Gastos",
+		footerrow: true,
 		loadComplete : function() {
 			var table = this;
 			setTimeout(function(){
-				//updatePagerIcons(table);
 				enableTooltips(table);
-			}, 0);
+				var grid = $(grid_selector),
+				sum = grid.jqGrid('getCol', 'monto', false, 'sum');
+				grid.jqGrid('footerData','set', {lugar: 'Total:', monto: sum});
+			}, 1);
 		}
 	});
 
