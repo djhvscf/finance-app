@@ -5,7 +5,7 @@ public class GastoFijoPOJO {
 
 	private int idGastoFijo;
 	private String nombre;
-	private double monto;
+	private float monto;
 	private String posibleFechaPago;
 	
 	public GastoFijoPOJO() {
@@ -43,14 +43,14 @@ public class GastoFijoPOJO {
 	/**
 	 * @return the monto
 	 */
-	public double getMonto() {
+	public float getMonto() {
 		return monto;
 	}
 
 	/**
 	 * @param monto the monto to set
 	 */
-	public void setMonto(double monto) {
+	public void setMonto(float monto) {
 		this.monto = monto;
 	}
 

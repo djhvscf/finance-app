@@ -49,8 +49,8 @@ public class GastoService implements GastoServiceInterface {
 	}
 
 	@Override
-	public List<Gasto> getByMonto(double monto) {
-		return gastoRepository.findByMonto(monto);
+	public List<Gasto> getByMonto(Float monto) {
+		return gastoRepository.findByMontoBetween(monto, monto);
 	}
 
 	@Override

@@ -12,7 +12,7 @@ public interface GastoFijoServiceInterface {
 	Page<GastoFijo> getAll(GastoFijoRequest gastoFijoRequest);
 	Boolean saveGastoFijo (GastoFijo gastoFijo);
 	List<GastoFijo> getByNombre (String nombre);
-	List<GastoFijo> getByMonto (double monto);
+	List<GastoFijo> getByMonto (float monto);
 	List<GastoFijo> getByPosibleFechaPago (String fecha);
 	GastoFijo getByIdGastoFijo (int idGastoFijo);
 }

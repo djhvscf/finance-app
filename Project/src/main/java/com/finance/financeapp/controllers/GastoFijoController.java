@@ -29,6 +29,8 @@ public class GastoFijoController extends BaseController{
 
 	private final String getAllCodeMessage = "Se obtuvieron los gastos fijos correctamente";
 	private final String correctSaveGasto = "Se guardó el gasto fijo correctamente";
+	private final String searchNombre = "Nombre";
+	private final String searchMonto = "Monto";
 	
 	@Autowired
 	GastoFijoServiceInterface gastoFijoService;
@@ -39,21 +41,38 @@ public class GastoFijoController extends BaseController{
 	public GastoFijoResponse getAll(GastoFijoRequest gastoFijoRequest){
 		
 		gastoFijoRequest.setPageNumber(gastoFijoRequest.getPageNumber() - 1);
-		Page<GastoFijo> gastosFijos = gastoFijoService.getAll(gastoFijoRequest);
-
+		Page<GastoFijo> gastosFijos = null;
 		GastoFijoResponse gastoFijoResponse = new GastoFijoResponse();
-
+		List<GastoFijoPOJO> viewGastosFijos = new ArrayList<GastoFijoPOJO>();
+		List<GastoFijo> gastosFijosList;
+		
+		if(!gastoFijoRequest.getSearchTerm().equals("")){
+			if(gastoFijoRequest.getSearchColumn().equals(searchNombre)){
+				gastosFijosList = gastoFijoService.getByNombre(gastoFijoRequest.getSearchTerm());
+			} else if (gastoFijoRequest.getSearchColumn().equals(searchMonto)){
+				gastosFijosList = gastoFijoService.getByMonto(Float.parseFloat(gastoFijoRequest.getSearchTerm()));
+			} else {
+				gastosFijosList = gastoFijoService.getByPosibleFechaPago(gastoFijoRequest.getSearchTerm());
+			}
+			
+			for (GastoFijo gastoFijo : gastosFijosList){
+				GastoFijoPOJO ngastoFijo = new GastoFijoPOJO();
+				PojoUtils.pojoMappingUtility(ngastoFijo, gastoFijo);
+				viewGastosFijos.add(ngastoFijo);
+			}
+		} else {
+			gastosFijos = gastoFijoService.getAll(gastoFijoRequest);
+			for (GastoFijo gasto : gastosFijos.getContent()){
+				GastoFijoPOJO ngastoFijo = new GastoFijoPOJO();
+				PojoUtils.pojoMappingUtility(ngastoFijo,gasto);
+				viewGastosFijos.add(ngastoFijo);
+			}
+			gastoFijoResponse.setTotalElements(gastosFijos.getTotalElements());
+			gastoFijoResponse.setTotalPages(gastosFijos.getTotalPages());
+		}
+		
 		gastoFijoResponse.setCode(successCode);
 		gastoFijoResponse.setCodeMessage(getAllCodeMessage);
-		gastoFijoResponse.setTotalElements(gastosFijos.getTotalElements());
-		gastoFijoResponse.setTotalPages(gastosFijos.getTotalPages());
-
-		List<GastoFijoPOJO> viewGastosFijos = new ArrayList<GastoFijoPOJO>();
-		for (GastoFijo gasto : gastosFijos.getContent()){
-			GastoFijoPOJO ngastoFijo = new GastoFijoPOJO();
-			PojoUtils.pojoMappingUtility(ngastoFijo,gasto);
-			viewGastosFijos.add(ngastoFijo);
-		}
 
 		gastoFijoResponse.setGastosFijos(viewGastosFijos);
 		return gastoFijoResponse;	

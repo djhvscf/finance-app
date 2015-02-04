@@ -28,6 +28,7 @@ public class SalarioController extends BaseController{
 
 	private final String getAllCodeMessage = "Se obtuvieron los salarios correctamente";
 	private final String correctSaveSalario = "Se guardó el salario correctamente";
+	private final String searchFecha = "Fecha";
 	
 	@Autowired
 	SalarioServiceInterface salarioService;
@@ -43,7 +44,7 @@ public class SalarioController extends BaseController{
 		List<SalarioPOJO> viewSalarios = new ArrayList<SalarioPOJO>();
 		List<Salario> salariosList;
 		if(!salarioRequest.getSearchTerm().equals("")) {
-			if(salarioRequest.getSearchColumn().equals("Fecha")) {
+			if(salarioRequest.getSearchColumn().equals(searchFecha)) {
 				salariosList = salarioService.getByFecha(salarioRequest.getSearchTerm());
 			} else {
 				salariosList = salarioService.getByMonto(Float.parseFloat(salarioRequest.getSearchTerm()));

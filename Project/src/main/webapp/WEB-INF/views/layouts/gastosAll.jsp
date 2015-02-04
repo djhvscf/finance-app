@@ -7,9 +7,9 @@
 			<form class="navbar-form navbar-left" role="search">
 		      	<div class="form-group">
 			        <div class="btn-group searchBtnGroup" data-toggle="buttons-radio">
-						<button type="button" class="btn btn-default active" ng-click="setSearchColumn('all',$event)">Todos</button>
-						<button type="button" class="btn btn-default" ng-click="setSearchColumn('firstName',$event)">Monto</button>
-						<button type="button" class="btn btn-default" ng-click="setSearchColumn('lastName',$event)">Lugar</button>
+						<button type="button" class="btn btn-default" ng-click="setSearchColumn('Fecha',$event)">Fecha</button>
+						<button type="button" class="btn btn-default" ng-click="setSearchColumn('Monto',$event)">Monto</button>
+						<button type="button" class="btn btn-default" ng-click="setSearchColumn('Lugar',$event)">Lugar</button>
 					</div>
 				</div>
 		      

@@ -13,8 +13,8 @@ public interface GastoFijoRepository extends CrudRepository<GastoFijo, Integer> 
 	public static final int PAGE_SIZE = 5;
 	
 	Page<GastoFijo> findAll(Pageable pageable);
-	List<GastoFijo> findByNombre(String nombre);
-	List<GastoFijo> findByMonto(double monto);
+	List<GastoFijo> findByNombreContaining(String nombre);
+	List<GastoFijo> findByMontoBetween(float defaultMonto, float monto);
 	List<GastoFijo> findByPosibleFechaPago(String posibleFechaPago);
 	GastoFijo findOne(Integer idGastoFijo);
 }

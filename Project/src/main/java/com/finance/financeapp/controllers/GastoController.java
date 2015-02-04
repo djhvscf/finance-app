@@ -29,6 +29,8 @@ public class GastoController extends BaseController{
 
 	private final String getAllCodeMessage = "Se obtuvieron los gastos correctamente";
 	private final String correctSaveGasto = "Se guardó el gasto correctamente";
+	private final String searchMonto = "Monto";
+	private final String searchLugar = "Lugar";
 	
 	@Autowired
 	GastoServiceInterface gastoService;
@@ -39,21 +41,36 @@ public class GastoController extends BaseController{
 	public GastoResponse getAll(GastoRequest gastoRequest){
 		
 		gastoRequest.setPageNumber(gastoRequest.getPageNumber() - 1);
-		Page<Gasto> gastos = gastoService.getAll(gastoRequest);
-
+		Page<Gasto> gastos = null;
 		GastoResponse gastoResponse = new GastoResponse();
-
+		List<GastoPOJO> viewGastos = new ArrayList<GastoPOJO>();
+		List<Gasto> gastosList;
+		if(!gastoRequest.getSearchTerm().equals("")){
+			if(gastoRequest.getSearchColumn().equals(searchMonto)){
+				gastosList = gastoService.getByMonto(Float.parseFloat(gastoRequest.getSearchTerm()));
+			} else if (gastoRequest.getSearchColumn().equals(searchLugar)){
+				gastosList = gastoService.getByLugar(gastoRequest.getSearchTerm());
+			} else {
+				gastosList = gastoService.getByFecha(gastoRequest.getSearchTerm());
+			}
+			for (Gasto gasto : gastosList){
+				GastoPOJO ngasto = new GastoPOJO();
+				PojoUtils.pojoMappingUtility(ngasto, gasto);
+				viewGastos.add(ngasto);
+			}
+		} else {
+			gastos = gastoService.getAll(gastoRequest);
+			for (Gasto gasto : gastos.getContent()){
+				GastoPOJO ngasto = new GastoPOJO();
+				PojoUtils.pojoMappingUtility(ngasto,gasto);
+				viewGastos.add(ngasto);
+			}
+			gastoResponse.setTotalElements(gastos.getTotalElements());
+			gastoResponse.setTotalPages(gastos.getTotalPages());
+		}
+		
 		gastoResponse.setCode(successCode);
 		gastoResponse.setCodeMessage(getAllCodeMessage);
-		gastoResponse.setTotalElements(gastos.getTotalElements());
-		gastoResponse.setTotalPages(gastos.getTotalPages());
-
-		List<GastoPOJO> viewGastos = new ArrayList<GastoPOJO>();
-		for (Gasto gasto : gastos.getContent()){
-			GastoPOJO ngasto = new GastoPOJO();
-			PojoUtils.pojoMappingUtility(ngasto,gasto);
-			viewGastos.add(ngasto);
-		}
 
 		gastoResponse.setGastos(viewGastos);
 		return gastoResponse;	

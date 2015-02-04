@@ -5,7 +5,7 @@ public class GastoPOJO {
 	
 	private int idGasto;
 	private String lugar;
-	private double monto;
+	private float monto;
 	private String descripcion;
 	private String fecha;
 
@@ -44,14 +44,14 @@ public class GastoPOJO {
 	/**
 	 * @return the monto
 	 */
-	public double getMonto() {
+	public float getMonto() {
 		return monto;
 	}
 
 	/**
 	 * @param monto the monto to set
 	 */
-	public void setMonto(double monto) {
+	public void setMonto(float monto) {
 		this.monto = monto;
 	}
 

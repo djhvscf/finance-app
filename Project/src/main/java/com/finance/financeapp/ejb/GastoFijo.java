@@ -17,7 +17,7 @@ public class GastoFijo implements Serializable{
 	private int idGastoFijo;
 	
 	private String nombre;
-	private double monto;
+	private float monto;
 	private String posibleFechaPago;
 	
 	public GastoFijo(){
@@ -55,14 +55,14 @@ public class GastoFijo implements Serializable{
 	/**
 	 * @return the monto
 	 */
-	public double getMonto() {
+	public float getMonto() {
 		return monto;
 	}
 
 	/**
 	 * @param monto the monto to set
 	 */
-	public void setMonto(double monto) {
+	public void setMonto(float monto) {
 		this.monto = monto;
 	}
 

@@ -57,7 +57,7 @@ public class SalarioService implements SalarioServiceInterface {
 
 	@Override
 	public List<Salario> getByMonto(Float monto) {
-		return salarioRepository.findByMontoBetween(0, monto);
+		return salarioRepository.findByMontoBetween(monto, monto);
 	}
 
 	@Override

@@ -51,12 +51,12 @@ public class GastoFijoService implements GastoFijoServiceInterface {
 
 	@Override
 	public List<GastoFijo> getByNombre(String nombre) {
-		return gastoFijoRepository.findByNombre(nombre);
+		return gastoFijoRepository.findByNombreContaining(nombre);
 	}
 
 	@Override
-	public List<GastoFijo> getByMonto(double monto) {
-		return gastoFijoRepository.findByMonto(monto);
+	public List<GastoFijo> getByMonto(float monto) {
+		return gastoFijoRepository.findByMontoBetween(monto, monto);
 	}
 
 	@Override

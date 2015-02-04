@@ -13,7 +13,7 @@ public interface GastoRepository extends CrudRepository<Gasto,Integer>  {
 	public static final int PAGE_SIZE = 5;
 	
 	Page<Gasto> findAll(Pageable pageable);
-	List<Gasto> findByMonto(double monto);
+	List<Gasto> findByMontoBetween(float defaulMonto, float monto);
 	List<Gasto> findByLugarContaining(String lugar);
 	List<Gasto> findByFecha(String fecha);
 	Gasto findOne(Integer idGasto);

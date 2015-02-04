@@ -11,7 +11,7 @@ public interface GastoServiceInterface {
 
 	Page<Gasto> getAll(GastoRequest gastoRequest);
 	Boolean saveGasto(Gasto gasto);
-	List<Gasto> getByMonto(double monto);
+	List<Gasto> getByMonto(Float monto);
 	List<Gasto> getByLugar(String lugar);
 	List<Gasto> getByFecha(String fecha);
 	Gasto getByIdGasto(int idGasto);
