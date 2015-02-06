@@ -28,6 +28,7 @@ public class SalarioController extends BaseController{
 
 	private final String getAllCodeMessage = "Se obtuvieron los salarios correctamente";
 	private final String correctSaveSalario = "Se guardó el salario correctamente";
+	private final String correctDeleteSalario = "Se eliminó el salario correctamente";
 	private final String searchFecha = "Fecha";
 	
 	@Autowired
@@ -86,6 +87,17 @@ public class SalarioController extends BaseController{
 		if(salarioService.saveSalario(salario)){
 			salarioResponse.setCode(successCode);
 			salarioResponse.setCodeMessage(correctSaveSalario);
+		}
+		return salarioResponse;
+	}
+	
+	@Path("/delete")
+	@POST
+	public SalarioResponse delete(int idSalario){
+		SalarioResponse salarioResponse = new SalarioResponse();
+		if(salarioService.deleteSalario(idSalario)){
+			salarioResponse.setCode(successCode);
+			salarioResponse.setCodeMessage(correctDeleteSalario);
 		}
 		return salarioResponse;
 	}

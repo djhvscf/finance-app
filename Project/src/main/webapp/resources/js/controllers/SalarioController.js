@@ -14,16 +14,15 @@ var SalarioController = function($scope, $http,$location,$modal,$log) {
 	$scope.requestObject.searchColumn = "ALL";
 	$scope.requestObject.searchTerm = "";
 
-    $scope.init = function() {
-    	
-    };
+    $scope.init = function() {};
     
     $scope.init();
     
-    var grid_selector = "#salariosList";
-	var pager_selector = "#salariosPager";
+    var grid_selector = "#salariosList",
+	pager_selector = "#salariosPager",
+	grid = $(grid_selector);
 
-    $(grid_selector).jqGrid(
+    grid.jqGrid(
 	{
 		url : 'rest/protected/salarios/getAll',
 		datatype: "json",
@@ -86,7 +85,7 @@ var SalarioController = function($scope, $http,$location,$modal,$log) {
 					$scope.requestObject.pageNumber -= 1;
 				}
 
-				$(grid_selector).setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid");
+				grid.setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid");
 			}
 
 		},
@@ -94,10 +93,10 @@ var SalarioController = function($scope, $http,$location,$modal,$log) {
 			$scope.requestObject.sortBy = [];
 			$scope.requestObject.sortBy.push(index);
 			$scope.requestObject.direction = sortorder.toUpperCase();
-			$(grid_selector).setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid");
+			grid.setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid");
 		},
 		ondblClickRow: function(rowid){		
-			var data = $(grid_selector).jqGrid('getRowData', rowid);
+			var data = grid.jqGrid('getRowData', rowid);
 			$scope.requestObject.salario = {};
 			$scope.requestObject.salario.idSalario = data.idSalario;
 			$scope.requestObject.salario.monto = data.monto;
@@ -117,14 +116,13 @@ var SalarioController = function($scope, $http,$location,$modal,$log) {
 			var table = this;
 			setTimeout(function(){
 				enableTooltips(table);
-				var grid = $(grid_selector),
-				sum = grid.jqGrid('getCol', 'monto', false, 'sum');
+				var sum = grid.jqGrid('getCol', 'monto', false, 'sum');
 				grid.jqGrid('footerData','set', {fecha: 'Total:', monto: sum});
 			}, 0);
 		}
 	});
 
-    jQuery(grid_selector).jqGrid('navGrid', pager_selector, {
+    grid.jqGrid('navGrid', pager_selector, {
 		edit : false,
 		add : true,
 		del : true,
@@ -134,25 +132,28 @@ var SalarioController = function($scope, $http,$location,$modal,$log) {
 
 	function enableTooltips(table) {
 		$('#add_salariosList')[0].title = "Agregar salario";
+		$('#del_salariosList')[0].title = "Eliminar salario";
 	}
 
 	$scope.setSearchColumn = function(searchValue,event){
-		//quick fix for radio buttons - only one selected.
 		$(".searchBtnGroup .btn").removeClass("active");
 		$scope.requestObject.searchColumn = searchValue;
 	};
 
 	$scope.search = function(){
-		$(grid_selector).setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid",[{ page: 1}]);
+		grid.setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid",[{ page: 1}]);
 	};
 
 	$(window).bind('resize', function() {
 		$("#salariosList").setGridWidth($(window).width()-300);
 	}).trigger('resize');
 
-
-	//CUSTOM ACTIONS
 	$("#add_salariosList .ui-pg-div").click(function(ev){
+		ev.preventDefault();
+		return false;
+	});
+	
+	$("#del_salariosList .ui-pg-div").click(function(ev){
 		ev.preventDefault();
 		return false;
 	});
@@ -172,7 +173,7 @@ var SalarioController = function($scope, $http,$location,$modal,$log) {
 		});
 
 	    modalInstance.result.then(function () {
-	    	$(grid_selector).setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid");
+	    	grid.setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid");
 	    },function () {
 	      $log.info('Modal dismissed at: ' + new Date());	      
 	    });
@@ -181,6 +182,22 @@ var SalarioController = function($scope, $http,$location,$modal,$log) {
 
 	$("#add_salariosList .ui-pg-div").click(function(ev){
 		$("#openAddNewSalarioModal").click();
+	});
+	
+	$("#del_salariosList .ui-pg-div").click(function(ev){
+		var rowId = grid.jqGrid('getGridParam', 'selrow');
+		if(rowId !== null) {
+			var idSalario = grid.jqGrid('getCell', rowId, 'idSalario');
+			$http.post('rest/protected/salarios/delete',idSalario)
+			.success(function(response) {
+				if(response.code === 200){
+					grid.trigger( 'reloadGrid' );
+					//Show success message
+				}
+			});
+		} else {
+			//Show error message
+		}
 	});
 };
 

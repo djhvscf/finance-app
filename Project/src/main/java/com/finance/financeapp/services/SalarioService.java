@@ -65,4 +65,14 @@ public class SalarioService implements SalarioServiceInterface {
 		return salarioRepository.findOne(idSalario);
 	}
 
+	@Override
+	public Boolean deleteSalario(int idSalario) {
+		try{
+			salarioRepository.delete(idSalario);
+			return true;
+		}catch(Exception ex){
+			return false;
+		}
+	}
+
 }

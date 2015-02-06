@@ -13,4 +13,5 @@ public interface SalarioServiceInterface {
 	List<Salario> getByFecha(String fecha);
 	List<Salario> getByMonto(Float monto);
 	Salario getByIdSalario(int idSalario);
+	Boolean deleteSalario (int idSalario);
 }

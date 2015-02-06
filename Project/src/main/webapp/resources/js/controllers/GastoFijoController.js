@@ -125,7 +125,7 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 		}
 	});
 
-    jQuery(grid_selector).jqGrid('navGrid', pager_selector, {
+    grid.jqGrid('navGrid', pager_selector, {
 		edit : false,
 		add : true,
 		del : true,
@@ -135,10 +135,10 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 
 	function enableTooltips(table) {
 		$('#add_gastosFijosList')[0].title = "Agregar gasto fijo";
+		$('#del_gastosFijosList')[0].title = "Eliminar gasto fijo";
 	}
 
 	$scope.setSearchColumn = function(searchValue,event){
-		//quick fix for radio buttons - only one selected.
 		$(".searchBtnGroup .btn").removeClass("active");
 		$scope.requestObject.searchColumn = searchValue;
 	};
@@ -151,8 +151,6 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 		$("#gastosFijosList").setGridWidth($(window).width()-300);
 	}).trigger('resize');
 
-
-	//CUSTOM ACTIONS
 	$("#add_gastosFijosList .ui-pg-div").click(function(ev){
 		ev.preventDefault();
 		return false;

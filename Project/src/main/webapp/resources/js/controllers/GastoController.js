@@ -153,7 +153,6 @@ var GastoController = function( $scope, $http, $location, $modal, $log ) {
 		$("#gastosList").setGridWidth($(window).width()-300);
 	}).trigger('resize');
 
-	//CUSTOM ACTIONS
 	$("#add_gastosList .ui-pg-div").click(function(ev){
 		ev.preventDefault();
 		return false;
