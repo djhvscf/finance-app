@@ -68,4 +68,14 @@ public class GastoFijoService implements GastoFijoServiceInterface {
 	public GastoFijo getByIdGastoFijo(int idGastoFijo) {
 		return gastoFijoRepository.findOne(idGastoFijo);
 	}
+
+	@Override
+	public Boolean deleteGastoFijo(int idGastoFijo) {
+		try{
+			gastoFijoRepository.delete(idGastoFijo);
+			return true;
+		} catch(Exception ex){
+			return false;
+		}
+	}
 }

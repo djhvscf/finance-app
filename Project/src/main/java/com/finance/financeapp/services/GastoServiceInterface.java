@@ -15,4 +15,5 @@ public interface GastoServiceInterface {
 	List<Gasto> getByLugar(String lugar);
 	List<Gasto> getByFecha(String fecha);
 	Gasto getByIdGasto(int idGasto);
+	Boolean deleteGasto(int idGasto);
 }

@@ -29,6 +29,7 @@ public class GastoFijoController extends BaseController{
 
 	private final String getAllCodeMessage = "Se obtuvieron los gastos fijos correctamente";
 	private final String correctSaveGasto = "Se guardó el gasto fijo correctamente";
+	private final String correctDeleteGastoFijo = "Se eliminó el gasto fijo correctamente";
 	private final String searchNombre = "Nombre";
 	private final String searchMonto = "Monto";
 	
@@ -93,6 +94,18 @@ public class GastoFijoController extends BaseController{
 			gastoFijoResponse.setCode(successCode);
 			gastoFijoResponse.setCodeMessage(correctSaveGasto);
 		}
+		return gastoFijoResponse;
+	}
+	
+	@Path("/delete")
+	@POST
+	public GastoFijoResponse delete(int idGastoFijo){
+		GastoFijoResponse gastoFijoResponse = new GastoFijoResponse();
+		if(gastoFijoService.deleteGastoFijo(idGastoFijo)){
+			gastoFijoResponse.setCode(successCode);
+			gastoFijoResponse.setCodeMessage(correctDeleteGastoFijo);
+		}
+		
 		return gastoFijoResponse;
 	}
 }

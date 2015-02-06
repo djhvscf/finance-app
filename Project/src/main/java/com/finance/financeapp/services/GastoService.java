@@ -67,4 +67,14 @@ public class GastoService implements GastoServiceInterface {
 	public Gasto getByIdGasto(int idGasto) {
 		return gastoRepository.findOne(idGasto);
 	}
+
+	@Override
+	public Boolean deleteGasto(int idGasto) {
+		try {
+			gastoRepository.delete(idGasto);
+			return true;
+		}catch (Exception ex){
+			return false;
+		}
+	}
 }

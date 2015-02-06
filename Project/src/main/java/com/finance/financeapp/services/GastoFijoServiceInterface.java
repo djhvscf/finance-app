@@ -15,4 +15,5 @@ public interface GastoFijoServiceInterface {
 	List<GastoFijo> getByMonto (float monto);
 	List<GastoFijo> getByPosibleFechaPago (String fecha);
 	GastoFijo getByIdGastoFijo (int idGastoFijo);
+	Boolean deleteGastoFijo (int idGastoFijo);
 }

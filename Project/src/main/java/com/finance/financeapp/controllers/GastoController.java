@@ -29,6 +29,7 @@ public class GastoController extends BaseController{
 
 	private final String getAllCodeMessage = "Se obtuvieron los gastos correctamente";
 	private final String correctSaveGasto = "Se guardó el gasto correctamente";
+	private final String correctDeleteGasto = "Se eliminó el gasto correctamente";
 	private final String searchMonto = "Monto";
 	private final String searchLugar = "Lugar";
 	
@@ -78,6 +79,7 @@ public class GastoController extends BaseController{
 	
 	@Path("/save")
 	@POST
+	@Transactional
 	public GastoResponse save(GastoRequest gastoRequest){	
 
 		GastoResponse gastoResponse = new GastoResponse();
@@ -92,6 +94,18 @@ public class GastoController extends BaseController{
 			gastoResponse.setCode(successCode);
 			gastoResponse.setCodeMessage(correctSaveGasto);
 		}
+		return gastoResponse;
+	}
+	
+	@Path("/delete")
+	@POST
+	public GastoResponse delete(int idGasto){
+		GastoResponse gastoResponse = new GastoResponse();
+		if(gastoService.deleteGasto(idGasto)){
+			gastoResponse.setCode(successCode);
+			gastoResponse.setCodeMessage(correctDeleteGasto);
+		}
+		
 		return gastoResponse;
 	}
 }

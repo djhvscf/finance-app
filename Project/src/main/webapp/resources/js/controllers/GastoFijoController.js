@@ -14,16 +14,15 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 	$scope.requestObject.searchColumn = "ALL";
 	$scope.requestObject.searchTerm = "";
 
-    $scope.init = function() {
-    	
-    };
+    $scope.init = function() {};
     
     $scope.init();
     
-    var grid_selector = "#gastosFijosList";
-	var pager_selector = "#gastosFijosPager";
+    var grid_selector = "#gastosFijosList",
+    pager_selector = "#gastosFijosPager",
+    grid = $(grid_selector);
 
-    $(grid_selector).jqGrid(
+    grid.jqGrid(
 	{
 		url : 'rest/protected/gastosFijos/getAll',
 		datatype: "json",
@@ -88,7 +87,7 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 					$scope.requestObject.pageNumber -= 1;
 				}
 
-				$(grid_selector).setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid");
+				grid.setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid");
 			}
 
 		},
@@ -96,10 +95,10 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 			$scope.requestObject.sortBy = [];
 			$scope.requestObject.sortBy.push(index);
 			$scope.requestObject.direction = sortorder.toUpperCase();
-			$(grid_selector).setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid");
+			grid.setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid");
 		},
 		ondblClickRow: function(rowid){		
-			var data = $(grid_selector).jqGrid('getRowData', rowid);
+			var data = grid.jqGrid('getRowData', rowid);
 			$scope.requestObject.gastoFijo = {};
 			$scope.requestObject.gastoFijo.idGastoFijo = data.idGastoFijo;
 			$scope.requestObject.gastoFijo.monto = data.monto;
@@ -120,8 +119,7 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 			var table = this;
 			setTimeout(function(){
 				enableTooltips(table);
-				var grid = $(grid_selector),
-				sum = grid.jqGrid('getCol', 'monto', false, 'sum');
+				var sum = grid.jqGrid('getCol', 'monto', false, 'sum');
 				grid.jqGrid('footerData','set', {nombre: 'Total:', monto: sum});
 			}, 1);
 		}
@@ -146,7 +144,7 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 	};
 
 	$scope.search = function(){
-		$(grid_selector).setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid",[{ page: 1}]);
+		grid.setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid",[{ page: 1}]);
 	};
 
 	$(window).bind('resize', function() {
@@ -156,6 +154,11 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 
 	//CUSTOM ACTIONS
 	$("#add_gastosFijosList .ui-pg-div").click(function(ev){
+		ev.preventDefault();
+		return false;
+	});
+	
+	$("#del_gastosFijosList .ui-pg-div").click(function(ev){
 		ev.preventDefault();
 		return false;
 	});
@@ -175,7 +178,7 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 		});
 
 	    modalInstance.result.then(function () {
-	    	$(grid_selector).setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid");
+	    	grid.setGridParam({'postData':JSON.stringify($scope.requestObject)}).trigger("reloadGrid");
 	    },function () {
 	      $log.info('Modal dismissed at: ' + new Date());	      
 	    });
@@ -184,6 +187,22 @@ var GastoFijoController = function($scope, $http,$location,$modal,$log) {
 
 	$("#add_gastosFijosList .ui-pg-div").click(function(ev){
 		$("#openAddNewGastoFijoModal").click();
+	});
+	
+	$("#del_gastosFijosList .ui-pg-div").click(function(ev){
+		var rowId = grid.jqGrid('getGridParam', 'selrow');
+		if(rowId !== null) {
+			var idGastoFijo = grid.jqGrid('getCell', rowId, 'idGastoFijo');
+			$http.post('rest/protected/gastosFijos/delete',idGastoFijo)
+			.success(function(response) {
+				if(response.code === 200){
+					grid.trigger( 'reloadGrid' );
+					//Show success message
+				}
+			});
+		} else {
+			//Show error message
+		}
 	});
 };
 
