@@ -127,7 +127,7 @@ var SalarioController = function($scope, $http,$location,$modal,$log) {
     jQuery(grid_selector).jqGrid('navGrid', pager_selector, {
 		edit : false,
 		add : true,
-		del : false,
+		del : true,
 		search: false,
 		refresh: false
 	});
