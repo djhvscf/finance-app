@@ -31,7 +31,7 @@
 				<div ng-class="{error: onError && modifyGastoFijoModal.posibleFechaPago.$invalid}">
 					<label class='col-sm-3 control-label'>Fecha pago</label> 
 					<div class="col-sm-8">
-						<input type="text" id="posibleFechaPago" class="form-control" name="posibleFechaPago" placeholder="Requerido" required ng-model="requestObject.gastoFijo.posibleFechaPago" />
+						<input type="text" id="posibleFechaPago" class="form-control" name="posibleFechaPago" placeholder="dd/mm/yyyy" required ng-model="requestObject.gastoFijo.posibleFechaPago" />
 						<span ng-show="onError && modifyGastoFijoModal.posibleFechaPago.$error.required" class="help-inline">Requerido</span>
 					</div>
 				</div>
